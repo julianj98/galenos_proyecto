@@ -35,7 +35,7 @@ def diagnostico(path_image):
 
 
     
-    plt.axis('off')
+    #plt.axis('off')
   
 
     array_neumonia=[0., 1.]
