@@ -4,7 +4,6 @@ from skimage.color import rgb2gray
 from keras.preprocessing import image
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 
@@ -15,14 +14,14 @@ def diagnostico(path_image):
     height_shape = 150
 
     names = ['NEUMONIA', "NO NEUMONIA"]
-    #imaget_path = "IA/Normal-1301.png"
+ 
     imaget_path = path_image[1:]
 
     path_model = 'IA/modelo.h5'
     new_model = load_model(path_model)
     modelt=new_model
-    #modelt = load_model("models/model_VGG16.h5")
-    print("Modelo cargado exitosamente")
+
+ 
 
     img=tf.keras.preprocessing.image.load_img(imaget_path, target_size=(150,150,3))
     x=image.img_to_array(img)
@@ -31,13 +30,13 @@ def diagnostico(path_image):
     images = np.vstack([x])
     images = images.reshape(-1, 150, 150, 1)
 
-    print("Predicción")
-    preds = modelt.predict(images, batch_size=10)
-    print(preds[0])
 
-    #plt.imshow(cv2.cvtColor(np.asarray(img),cv2.COLOR_BGR2RGB))
+    preds = modelt.predict(images, batch_size=10)
+
+
+    
     plt.axis('off')
-    #plt.show()
+  
 
     array_neumonia=[0., 1.]
     array_normal=[1., 0.]
