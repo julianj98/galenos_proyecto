@@ -20,7 +20,8 @@ class RadiografiasSerializer(s.ModelSerializer):
 class PacienteSerializer(s.ModelSerializer):
     class Meta:
         model=Paciente
-        fields='__all__'
+        #fields='__all__'
+        exclude=('domicilio',)
 
 class ProvinciasSerializer(s.ModelSerializer):
     
@@ -40,18 +41,52 @@ class PaisesSerializer(s.ModelSerializer):
         model=Pais
         fields='__all__'
 
+class SecretarioSerializer(s.ModelSerializer):
+     class Meta:
+        model=Secretario
+        exclude=('domicilio',)
 
 class MedicoSerializer(s.ModelSerializer):
     
     class Meta:
         model=Medico
-        fields='__all__'
+        #fields='__all__'
+        exclude=('domicilio',)
         
 class RadiologosSerializer(s.ModelSerializer):
     
     class Meta:
         model=Radiologo
-        fields='__all__'
+        #fields='__all__'
+        exclude=('domicilio',)
+        
+class SecretarioSerializer(s.ModelSerializer):
+    
+    class Meta:
+        model=Secretario
+        #fields='__all__'
+        exclude=('domicilio',)
+
+class ABMSecretarioSerializer(s.Serializer):
+    dni=s.CharField(required=True)
+    email=s.EmailField(required=True)
+    nombre=s.CharField(required=True)
+    apellido=s.CharField(required=True)
+    #domicilio=s.CharField(required=True) 
+    telefono=s.IntegerField(required=True)
+    fecha_alta = s.DateField(required=False)
+    fecha_nacimiento=s.DateField(required=True)
+    foto=s.ImageField(required=False)
+
+    direccion=s.CharField(required=True)
+    entre_calle_sup=s.CharField(required=True)
+    entre_calle_inf=s.CharField(required=True)
+    fecha_desde=s.DateField(required=True)
+    
+    fecha_hasta=s.DateField(required=False)
+    
+    localidad=s.CharField(required=True)
+    legajo=s.IntegerField(required=True)
 
 class ABMMedicoSerializer(s.Serializer):
     dni=s.CharField(required=True)
@@ -106,7 +141,32 @@ class ABMPacienteSerializer(s.Serializer):
     # provincia=s.CharField(required=True)
     # pais=s.CharField(required=True)
     
+class ABMRadiologoSerializer(s.Serializer):
+    dni=s.CharField(required=True)
+    email=s.EmailField(required=True)
+    nombre=s.CharField(required=True)
+    apellido=s.CharField(required=True)
+    #domicilio=s.CharField(required=True) 
+    telefono=s.IntegerField(required=True)
+    fecha_alta = s.DateField(required=False)
+    fecha_nacimiento=s.DateField(required=True)
     
+    foto=s.ImageField(required=False)
+    
+    numero_matricula=s.IntegerField(required=True) 
+    direccion=s.CharField(required=True)
+    entre_calle_sup=s.CharField(required=True)
+    entre_calle_inf=s.CharField(required=True)
+    fecha_desde=s.DateField(required=True)
+    
+    fecha_hasta=s.DateField(required=False)
+    
+    localidad=s.CharField(required=True)
+    # codigo_postal=s.CharField(required=True)
+    # provincia=s.CharField(required=True)
+    # pais=s.CharField(required=True)
+    legajo=s.IntegerField(required=True)
+#class PersonaSerializer()
 
 class RadiografiaDiagnosticoSerializer(s.ModelSerializer):
     medico=s.SerializerMethodField()
